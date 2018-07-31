@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <!--忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <!--[if lt IE 9]> 
+        <script src="lib/html5shiv/html5shiv.min.js"></script> 
+        <script src="lib/respond/respond.min.js"></script> 
+    <![endif]-->
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+
+        .map {
+            height: 100%;
+            width: 100%;
+            float: left;
+        }
+
+        #mapContainer .amap-indoormap-floorbar-control {
+            bottom: 10%
+        }
+
+        .amap-logo,
+        .amap-copyright {
+            display: none !important;
+        }
+
+        .amap-indoormap-floorbar-control {
+            position: absolute;
+            top: 30%;
+            bottom: 0 !important;
+            margin: auto;
+        }
+
+        #amap-indoormap-floorbar-control {
+            z-index: 1000;
+        }
+
+
+
+        .shopDetail {
+            max-width: 100%;
+            height: auto;
+            padding-left: 8px;
+            padding-right: 8px;
+            font-size: 12px;
+        }
+
+        .shopDetail h3 {
+            font-size: 14px;
+            width: 220px;
+            padding-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .amap-info-content.amap-info-outer {
+            border-radius: 6px;
+        }
+
+        .imgsBox {
+            height: 200%;
+            max-width: 220px;
+            overflow-x: auto;
+        }
+
+        .wrapper {
+            width: 680px;
+        }
+
+        .shopImg {
+            height: 100px;
+            border-radius: 3px;
+            width: 220px;
+
+        }
+
+        .adress {
+            width: 220px;
+            font-size: 12px;
+            color: rgb(43, 43, 43);
+            white-space: normal;
+            color: #aaa;
+        }
+
+        .amap-info-close {
+            right: 5px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 14px;
+            line-height: 12px;
+            padding: 3px;
+
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loadingBox {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background: rgba(96, 183, 213, 0.5);
+            z-index: 1000;
+
+        }
+
+        .loadingImgBox {
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            text-align: center;
+        }
+
+        .loadingImgBox p {
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .loadingImg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .amap-info-close {
+            font-size: 19px !important;
+        }
+
+        #freshButton {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            bottom: 25px;
+            left: 20px;
+            z-index: 666;
+            box-shadow: 10px 5px 34px #888888;
+        }
+    </style>
+    <title>上海虹桥室内地图</title>
+</head>
+
+<body>
+    <div id="mapContainer" class="map" tabindex="0"></div>
+    <div class="freshButton" id="freshButton"></div>
+    <div class="loadingBox" id="loadingBox">
+        <div class="loadingImgBox">
+            <img class='loadingImg' src="http://www.kedo.gov.cn/upload/resources/image/2015/11/03/144653551630115504.gif?1496681463372"
+                alt="loading">
+            <p>地图初始化中....</p>
+        </div>
+    </div>
+    <script type="text/javascript" src='https://webapi.amap.com/maps?v=1.4.8&key=ddccae5f4b159aee7f930fc70b5a6f5b&plugin=AMap.ToolBar'></script>
+    <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+    <script type="text/javascript">
+        var loading = true
+        var infoWindow
+        var loadingBox = document.getElementById('loadingBox')
+        var freshButton = document.getElementById('freshButton')
+        var map = new AMap.Map('mapContainer', {
+            resizeEnable: true,
+            center: [121.3207790000, 31.1940680000],
+            zoom: 17,
+            showIndoorMap: true,
+        });
+        map.plugin(["AMap.ToolBar"]);
+        map.plugin(["AMap.PlaceSearch"])
+        map.addControl(new AMap.ToolBar());
+        var placeSearch = new AMap.PlaceSearch({
+            extensions: 'all',
+            map: map,
+            autoFitView: true,
+            showCover: true
+        });
+
+        map.on('indoor_create', function () {
+            map.indoorMap.showIndoorMap('B00155MPRL', 5);
+            map.indoorMap.show()
+            map.indoorMap.on('complete', function () {
+            })
+            map.indoorMap.on('floor_complete', function (data) {
+                loadingBox.style.display = 'none'
+                if (infoWindow) {
+                    infoWindow.close()
+                }
+
+            })
+        })
+        map.on('zoomchange', function () {
+            map.indoorMap.show()
+        })
+        map.on('dragend', function () {
+            map.indoorMap.show()
+        })
+        map.on('complete', function () {
+        })
+        freshButton.onclick = function () {
+            map.setCenter([121.3207790000, 31.1940680000])
+            map.setZoom(17)
+        }
+        map.indoorMap.on('click', function (data) {
+            if (data.shop && data.shop.poiId != '0') {
+                placeSearch.getDetails(data.shop.poiId, function (status, result) {
+                    if (status === 'complete' && result.info === 'OK') {
+                        console.log(result.poiList.pois[0])
+                        let MarkerDatas = result.poiList.pois[0]
+                        map.setCenter([data.lnglat.lng, data.lnglat.lat])
+                        var infoStr = `<div class='shopDetail'>
+                             <h3 class='shopName'>${MarkerDatas.name}<h3>
+                             <div class='imgsBox ${MarkerDatas.photos ? '' : 'hidden'}'>
+                                <div class='wrapper' style='width:${MarkerDatas.photos ? (MarkerDatas.photos.length * 220) + 20 : 0}px'>
+                                    <img class='shopImg ${MarkerDatas.photos[0] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[0] ? MarkerDatas.photos[0].url : ''} >
+                                    <img class='shopImg ${MarkerDatas.photos[1] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[1] ? MarkerDatas.photos[1].url : ''} >
+                                    <img class='shopImg ${MarkerDatas.photos[2] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[2] ? MarkerDatas.photos[2].url : ''} >
+                                </div>
+                             </div>     
+                             <div class='adress'>${MarkerDatas.address}</div>
+                            </div >`
+                        infoWindow = new AMap.InfoWindow({
+                            content: infoStr
+                        });
+                        infoWindow.open(map, [data.lnglat.lng, data.lnglat.lat]);
+
+                    }
+                });
+            } else if (data.shop && data.shop.poiId === '0') {
+                map.setCenter([data.lnglat.lng, data.lnglat.lat])
+                infoWindow = new AMap.InfoWindow({
+                    content: `<div class='shopDetail'>${data.shop.name}</div >`
+                });
+                infoWindow.open(map, [data.lnglat.lng, data.lnglat.lat]);
+            }
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
