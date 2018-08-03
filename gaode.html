@@ -37,6 +37,7 @@
         <script src="lib/html5shiv/html5shiv.min.js"></script> 
         <script src="lib/respond/respond.min.js"></script> 
     <![endif]-->
+    <link rel="stylesheet" href="./style/iconfont.css">
     <style type="text/css">
         * {
             padding: 0;
@@ -148,6 +149,7 @@
             bottom: 0px;
             background: rgba(96, 183, 213, 0.5);
             z-index: 1000;
+            display: block;
 
         }
 
@@ -179,21 +181,264 @@
 
         #freshButton {
             position: fixed;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             bottom: 25px;
             left: 20px;
             z-index: 666;
             box-shadow: 10px 5px 34px #888888;
+            text-align: center;
+            background: #fff;
+        }
+
+        #freshButton>i {
+            color: #aaa;
+            line-height: 35px;
+        }
+
+        .serachBox {
+            padding: 0;
+            margin: 0;
+            width: 90%;
+            height: 40px;
+            background: #fff;
+            position: fixed;
+            top: 32px;
+            left: 5%;
+            border-radius: 5px;
+            z-index: 800;
+            font-size: 12px;
+            box-sizing: border-box;
+            box-shadow: 10px 5px 34px #888888;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .minSearch {
+            animation: scaleWithSmall .2s ease;
+            animation-fill-mode: forwards;
+        }
+
+        .maxSearch {
+            animation: scaleWithMax .2s ease;
+            animation-fill-mode: forwards;
+        }
+
+        .searchResult {
+            padding: 0;
+            margin: 0;
+            width: 90%;
+            height: auto;
+            background: #fff;
+            position: fixed;
+            top: 74px;
+            left: 5%;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 12px;
+
+
+        }
+
+        .serachBox input {
+            border: none;
+            border-width: 0;
+            outline: none;
+            flex: 1;
+            padding-left: 10px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-radius: 5px;
+
+        }
+
+        .serachBox i.fa {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            color: #999;
+        }
+
+        input::-webkit-input-placeholder {
+            color: #999;
+        }
+
+        .searchResult .Item {
+            width: 100%;
+            height: 55px;
+            border-bottom: 0.5px solid #e8e6e6;
+        }
+
+        .searchResult .Item p.shopName {
+            font-size: 14px;
+            padding-left: 10px;
+            padding-right: 10px;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 8px;
+        }
+
+        .searchResult .Item p.shopType {
+            font-size: 12px;
+            padding-left: 15px;
+            color: #ccc;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 5px;
+        }
+
+        .searchResult .Item.noResult {}
+
+        .searchResult .Item.noResult p {
+            display: block;
+            width: 100%;
+            height: 100%;
+            line-height: 55px;
+            text-align: center;
+            color: #999;
+        }
+
+        .shopsList {
+            position: fixed;
+            bottom: 140px;
+            right: 15px;
+            z-index: 777;
+            width: 35px;
+            height: 35px;
+            background: #fff;
+            border-radius: 50%;
+            line-height: 35px;
+            text-align: center;
+        }
+
+        .shopListResult {
+            background: rgba(253, 253, 253, 1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            color: #565050;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .shopListResult h3 {
+            font-size: 15px;
+            color: #635e5e;
+            padding-top: 12px;
+            padding-left: 10px;
+        }
+
+        .listItem {
+            width: 100%;
+            height: 70px;
+            display: flex;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .listItem:first-child {
+            margin-top: 10px;
+        }
+
+        .listItem img {
+            width: 58px;
+            height: 58px;
+            margin: 6px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            border: 2px solid #b2b5b3;
+        }
+
+        .listItem .shopInfo {
+            flex: 1;
+        }
+
+        .listItem .shopInfo .shopAddress {
+            padding-top: 9px;
+            font-size: 12px;
+            padding-left: 8px;
+            max-width: 280px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #aaa;
+        }
+
+        .shopListResult h3.title span {
+            font-size: 18px;
+        }
+
+        .shopListResult .closeButton {
+            position: fixed;
+            right: 15px;
+            top: 12px;
+            width: 24px;
+            height: 24px;
+            color: #c1afaf;
+            font-weight: bolder;
+            text-align: center;
+            /* line-height: 24px; */
+            /* background: #a5bde6; */
+            border-radius: 50%;
+            color: #868383;
+            font-size: 18px;
+        }
+
+        @keyframes scaleWithSmall {
+            from {
+                width: 90%
+            }
+            to {
+                width: 40px;
+                border-radius: 50%;
+            }
+        }
+
+        @keyframes scaleWithMax {
+            from {
+                width: 40px;
+            }
+            to {
+                width: 90%;
+                border-radius: 5px;
+            }
         }
     </style>
     <title>上海虹桥室内地图</title>
 </head>
 
 <body>
+    <div class="serachBox">
+        <input class="serachInput" type='text' placeholder="关键词 如:快餐" id="serachInput" />
+        <i class="icon iconfont icon-shouqi fa fa-search" id='serachIcon'></i>
+    </div>
+    <div class="searchResult" id="searchResult"></div>
     <div id="mapContainer" class="map" tabindex="0"></div>
-    <div class="freshButton" id="freshButton"></div>
+    <div class="shopsList">
+        <i class="fa fa-map-o icon iconfont icon-shangdian"></i>
+    </div>
+    <div class="shopListResult">
+        <div class="closeButton">&times;</div>
+        <h3 class="title">
+            <span>附近商店</span>
+            <i class="fa fa-university icon iconfont icon-shangdian"></i>
+        </h3>
+        <div class="shopListContainer">
+
+        </div>
+    </div>
+    <div class="freshButton" id="freshButton">
+        <i class="fa fa-repeat icon iconfont icon-msnui-refresh-line"></i>
+    </div>
     <div class="loadingBox" id="loadingBox">
         <div class="loadingImgBox">
             <img class='loadingImg' src="http://www.kedo.gov.cn/upload/resources/image/2015/11/03/144653551630115504.gif?1496681463372"
@@ -203,59 +448,352 @@
     </div>
     <script type="text/javascript" src='https://webapi.amap.com/maps?v=1.4.8&key=ddccae5f4b159aee7f930fc70b5a6f5b&plugin=AMap.ToolBar'></script>
     <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
     <script type="text/javascript">
-        var loading = true
-        var infoWindow
-        var loadingBox = document.getElementById('loadingBox')
-        var freshButton = document.getElementById('freshButton')
-        var map = new AMap.Map('mapContainer', {
-            resizeEnable: true,
-            center: [121.3207790000, 31.1940680000],
-            zoom: 17,
-            showIndoorMap: true,
-        });
-        map.plugin(["AMap.ToolBar"]);
-        map.plugin(["AMap.PlaceSearch"])
-        map.addControl(new AMap.ToolBar());
-        var placeSearch = new AMap.PlaceSearch({
-            extensions: 'all',
-            map: map,
-            autoFitView: true,
-            showCover: true
-        });
+        window.onload = function () {
+            var loading = true
+            var infoWindow
+            // 实时搜索
+            var placeSearch
+            var polygonArr = [
+                // [121.318477, 31.194702],
+                // [121.322766, 31.194861],
+                // [121.322787, 31.194676],
+                // [121.322787, 31.194676],
+                // [121.323141, 31.194882],
+                // [121.324997, 31.194939],
+                // [121.325022, 31.194708],
+                // [121.325258, 31.194717],
+                // [121.325236, 31.194939],
+                // [121.327334, 31.195045],
+                // [121.327886, 31.195568],
+                // [121.328653, 31.195591],
+                // [121.328581, 31.197225],
+                // [121.328964, 31.196915],
+                // [121.328828, 31.196373],
+                // [121.328873, 31.195607],
+                // [121.329109, 31.19558],
+                // [121.329227, 31.193099],
+                // [121.328967, 31.193086],
+                // [121.329217, 31.191753],
+                // [121.328897, 31.191438],
+                // [121.327935, 31.191402],
+                // [121.327763, 31.193164],
+                // [121.323268, 31.19332],
+                // [121.318569, 31.193155]
+                [121.318461, 31.194704],
+                [121.322772, 31.194864],
+                [121.322842, 31.193363],
+                [121.318556, 31.19318]
+            ];
+            var searchInputShow = false
+            var shopsListData = [
+                "The Play Card"
+                , "迪士尼"
+                , "上海女人"
+                , "Kiehl's"
+                , "GULAO&SHAYU"
+                , "吉普顿"
+                , "倍轻松 Breo"
+                , "台绣"
+                , "AIGLE"
+                , "ELLE"
+                , "VASTO"
+                , "SASA"
+                , "比音勒芬"
+                , "上海故事"
+                , "北客 Beaume"
+                , "Vittorio Di Giacomo"
+                , "Kaltendin"
+                , "鸥美药妆 Omey"
+                , "外交官"
+                , "JAKET"
+                , "Innisfree"
+                , "鄂尔多斯"
+                , "卡西欧"
+                , "天马之旅"
+                , "瑞红 "
+                , "Samsonite"
+                , "翼蓝数码"
+                , "Balabala"
+                , "TEENIE WEENIE"
+                , "YIBOYO"
+                , "CROCS"
+                , "Echolac"
+                , "She's"
+                , "皇冠"
+                , "绝代佳人"
+                , "荣泰"
+                , "奥康"
+                , "NORTHLAND"
+                , "艾叶"
+                , "Costa"
+                , "咖宝咖啡"
+                , "赛百味"
+                , "康师傅私房牛肉面 "
+                , "德克士"
+                , "汉堡王"
+                , "小杨生煎"
+                , "味千拉面"
+                , "可趣咖啡"
+                , "唐家饼"
+                , "肯德基"
+                , "食其家"
+                , "真功夫"
+                , "紫燕百味鸡"
+                , "谷田稻香"
+                , "老娘舅"
+                , "大娘水饺"
+                , "来伊份"
+                , "宝岛101"
+                , "台湾小吃"
+                , "吉祥馄饨"
+                , "永和大王"
+                , "百事佳"
+                , "老北桥过桥米线"
+                , "自然派"
+                , "黄生记面铺"
+                , "面包新语"
+                , "美珍香"
+                , "釜山大叔"
+                , "拿渡麻辣香锅"
+                , "享甜"
+                , "番茄妹米线"
+                , "福海堂"
+                , "麦当劳"
+                , "悦鸿斋"
+                , "上海特产"
+                , "新鲜岛 "
+                , "食尚汇"
+                , "The Cocoa Trees"
+                , "客吉莱 KJ-life"
+                , "第一食品"
+                , "好德"
+                , "丰培食品"
+                , "喜士多"
+                , "汉臣"
+                , "爱购便利"
+                , "百杜食汇"
+                , "喜千连"
+                , "绝味鸭脖"
+                , "周黑鸭"
+                , "留夫鸭"]
+            var shopListContainer = document.getElementsByClassName('shopListContainer')[0]
+            var shopListResult = document.getElementsByClassName('shopListResult')[0]
+            var shopsList = document.getElementsByClassName('shopsList')[0]
+            var closeButton = document.getElementsByClassName('closeButton')[0]
+            var searchButton = document.getElementById('serachIcon')
+            var serachInputs = document.getElementById('serachInput')
+            var serachBox = document.getElementsByClassName('serachBox')[0]
+            var searchResult = document.getElementById('searchResult')
+            searchButton.onclick = function () {
+                if (searchInputShow) {
+                    serachBox.setAttribute('class', 'serachBox scaleWithMax')
+                    searchButton.setAttribute('class', 'con iconfont  fa fa-search icon-shouqi')
+                    serachInputs.style.display = 'block'
+                    searchResult.style.display = 'block'
 
-        map.on('indoor_create', function () {
-            map.indoorMap.showIndoorMap('B00155MPRL', 5);
-            map.indoorMap.show()
-            map.indoorMap.on('complete', function () {
-            })
-            map.indoorMap.on('floor_complete', function (data) {
-                loadingBox.style.display = 'none'
-                if (infoWindow) {
-                    infoWindow.close()
+                    searchInputShow = false
+                } else {
+                    searchButton.setAttribute('class', 'con iconfont icon-sousuo fa fa-search')
+                    serachBox.setAttribute('class', 'serachBox minSearch')
+                    serachInputs.style.display = 'none'
+                    searchResult.style.display = 'none'
+                    searchInputShow = true
                 }
 
+            }
+            // 初始化搜索框
+            searchButton.setAttribute('class', 'con iconfont icon-sousuo fa fa-search')
+            serachBox.setAttribute('class', 'serachBox minSearch')
+            serachInputs.style.display = 'none'
+            searchResult.style.display = 'none'
+            searchInputShow = true
+            // 关闭遮罩层
+            closeButton.onclick = function () {
+                shopListResult.style.display = 'none'
+            }
+
+
+
+            var crrentSearchData = []
+            var polygon = new AMap.Polygon({
+                path: polygonArr,//设置多边形边界路径
+                strokeColor: "#FF33FF", //线颜色
+                strokeOpacity: 0, //线透明度
+                strokeWeight: 3,    //线宽
+                fillColor: "#1791fc", //填充色
+                fillOpacity: 1//填充透明度
+            });
+            var loadingBox = document.getElementById('loadingBox')
+            var freshButton = document.getElementById('freshButton')
+            var map = new AMap.Map('mapContainer', {
+                resizeEnable: true,
+                center: [121.3207790000, 31.1940680000],
+                zoom: 17,
+                showIndoorMap: true,
+            });
+            map.plugin(["AMap.ToolBar"]);
+            map.plugin(["AMap.PlaceSearch"], function () {
+                placeSearch = new AMap.PlaceSearch({
+                    extensions: 'all',
+                    pageSize: 10,
+                    pageIndex: 1,
+                    autoFitView: true,
+                    showCover: true
+                });
             })
-        })
-        map.on('zoomchange', function () {
-            map.indoorMap.show()
-        })
-        map.on('dragend', function () {
-            map.indoorMap.show()
-        })
-        map.on('complete', function () {
-        })
-        freshButton.onclick = function () {
-            map.setCenter([121.3207790000, 31.1940680000])
-            map.setZoom(17)
-        }
-        map.indoorMap.on('click', function (data) {
-            if (data.shop && data.shop.poiId != '0') {
-                placeSearch.getDetails(data.shop.poiId, function (status, result) {
+            map.addControl(new AMap.ToolBar());
+
+            map.on('click', function (e) {
+                console.log(e)
+            })
+            map.on('indoor_create', function () {
+                map.indoorMap.showIndoorMap('B00155MPRL', 5);
+                map.indoorMap.show()
+                map.indoorMap.on('complete', function () {
+                })
+                map.indoorMap.on('floor_complete', function (data) {
+                    loadingBox.style.display = 'none'
+                    if (infoWindow) {
+                        // infoWindow.close()
+                    }
+                    map.indoorMap.show()
+                })
+                map.indoorMap.on('click', function (data) {
+                    if (data.shop && data.shop.poiId != '0') {
+                        console.log(data.shop)
+                        placeSearch.getDetails(data.shop.poiId, function (status, result) {
+                            if (status === 'complete' && result.info === 'OK') {
+                                let MarkerDatas = result.poiList.pois[0]
+                                map.setCenter([data.lnglat.lng, data.lnglat.lat])
+                                var infoStr = `<div class='shopDetail'>
+                             <h3 class='shopName'>${MarkerDatas.name}<h3>
+                             <div class='imgsBox ${MarkerDatas.photos ? '' : 'hidden'}'>
+                                <div class='wrapper' style='width:${MarkerDatas.photos ? (MarkerDatas.photos.length * 220) + 20 : 0}px'>
+                                    <img class='shopImg ${MarkerDatas.photos[0] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[0] ? MarkerDatas.photos[0].url : ''} >
+                                    <img class='shopImg ${MarkerDatas.photos[1] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[1] ? MarkerDatas.photos[1].url : ''} >
+                                    <img class='shopImg ${MarkerDatas.photos[2] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[2] ? MarkerDatas.photos[2].url : ''} >
+                                </div>
+                             </div>     
+                             <div class='adress'>${MarkerDatas.address}</div>
+                            </div >`
+                                infoWindow = new AMap.InfoWindow({
+                                    content: infoStr
+                                });
+                                infoWindow.open(map, [data.lnglat.lng, data.lnglat.lat]);
+
+                            }
+                        });
+                    } else if (data.shop && data.shop.poiId === '0') {
+                        map.setCenter([data.lnglat.lng, data.lnglat.lat])
+                        infoWindow = new AMap.InfoWindow({
+                            content: `<div class='shopDetail'>${data.shop.name}</div >`
+                        });
+                        infoWindow.open(map, [data.lnglat.lng, data.lnglat.lat]);
+                    }
+                })
+            })
+            map.on('zoomchange', function () {
+
+            })
+
+            map.on('dragend', function () {
+                map.indoorMap.show()
+            })
+            map.on('complete', function () {
+                loadingBox.style.display = 'none'
+            })
+            freshButton.onclick = function () {
+                map.setCenter([121.3207790000, 31.1940680000])
+                map.setZoom(17)
+                let stamp = new Date().getTime()
+                window.location.href = `https://service.lavector.com/wxmap/index.html?${stamp}`
+            }
+            let serachInput = document.getElementById('serachInput')
+            serachInput.onkeyup = function (e) {
+                var ItemStr = ''
+                if (!e.target.value) {
+                    let searchResult = document.getElementById('searchResult')
+                    searchResult.innerHTML = ``
+                    return
+                } else {
+                    let searchResult = document.getElementById('searchResult')
+                    placeSearch.searchInBounds(e.target.value, polygon, function (status, data) {
+                        if (status === 'complete') {
+                            console.log(data)
+                            crrentSearchData = data.poiList.pois
+                            for (let i = 0; i < data.poiList.pois.length; i++) {
+                                ItemStr = ItemStr + `<div class="Item" data-id=${data.poiList.pois[i].id}>
+                       <p class="shopName" data-id=${data.poiList.pois[i].id}>${data.poiList.pois[i].name}</p>
+                       <p class="shopType" data-id=${data.poiList.pois[i].id}>${data.poiList.pois[i].type}</p>
+                       </div>`}
+                            searchResult.innerHTML = ItemStr
+                            searchResult.onclick = function (e) {
+                                console.log(e.target.getAttribute('data-id'))
+                                let BID = e.target.getAttribute('data-id')
+                                //标点展示详细信息
+                                // 清除自动提示面板
+                                searchResult.innerHTML = ``
+                                //展示详细信息
+                                const ItemInfo = crrentSearchData.filter(item => item.id === BID)
+                                console.log(ItemInfo[0])
+                                if (ItemInfo[0].indoor_map) {
+                                    console.log(ItemInfo[0].indoor_data)
+                                    // map.indoorMap.showFloor(ItemInfo[0].indoor_data.floor, false)
+                                    const floor = parseInt(ItemInfo[0].indoor_data.floor)
+                                    map.indoorMap.showFloor(floor, true)
+                                    map.indoorMap.showIndoorMap("B00155MPRL", floor, ItemInfo[0].id)
+                                }
+                                let MarkerDatas = ItemInfo[0]
+                                map.setCenter([MarkerDatas.location.lng, MarkerDatas.location.lat])
+                                var infoStr = `<div class='shopDetail'>
+                             <h3 class='shopName'>${MarkerDatas.name}<h3>
+                             <div class='imgsBox ${MarkerDatas.photos ? '' : 'hidden'}'>
+                                <div class='wrapper' style='width:${MarkerDatas.photos ? (MarkerDatas.photos.length * 220) + 20 : 0}px'>
+                                    <img class='shopImg ${MarkerDatas.photos[0] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[0] ? MarkerDatas.photos[0].url : ''} >
+                                    <img class='shopImg ${MarkerDatas.photos[1] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[1] ? MarkerDatas.photos[1].url : ''} >
+                                    <img class='shopImg ${MarkerDatas.photos[2] ? '' : 'hidden'}' src=${MarkerDatas.photos && MarkerDatas.photos[2] ? MarkerDatas.photos[2].url : ''} >
+                                </div>
+                             </div>     
+                             <div class='adress'>${MarkerDatas.address}</div>
+                            </div >`
+                                infoWindow = new AMap.InfoWindow({
+                                    content: infoStr
+                                });
+                                searchButton.setAttribute('class', 'con iconfont icon-sousuo fa fa-search')
+                                serachBox.setAttribute('class', 'serachBox minSearch')
+                                serachInput.style.display = 'none'
+                                searchResult.style.display = 'none'
+                                searchInputShow = true
+                                infoWindow.open(map, [MarkerDatas.location.lng, MarkerDatas.location.lat]);
+                                serachInput.value = ''
+                                map.setZoom(22)
+                            }
+                        } else {
+                            let searchResult = document.getElementById('searchResult')
+                            searchResult.innerHTML = `
+                    <div class="Item noResult">
+                        <p>暂无查询结果,请更换关键词
+                            <i class="fa fa-smile-o"></i>
+                        </p>
+                    </div> `
+                        }
+                    });
+                }
+            }
+
+            shopListResult.onclick = function (e) {
+                let shopId = e.target.getAttribute('data-id')
+                shopListResult.style.display = 'none'
+                placeSearch.getDetails(shopId, function (status, result) {
                     if (status === 'complete' && result.info === 'OK') {
                         console.log(result.poiList.pois[0])
                         let MarkerDatas = result.poiList.pois[0]
-                        map.setCenter([data.lnglat.lng, data.lnglat.lat])
+                        const floor = parseInt(MarkerDatas.indoor_data.floor)
+                        map.indoorMap.showFloor(floor, true)
+                        map.setCenter([MarkerDatas.location.lng, MarkerDatas.location.lat])
+                        map.setZoom(25)
                         var infoStr = `<div class='shopDetail'>
                              <h3 class='shopName'>${MarkerDatas.name}<h3>
                              <div class='imgsBox ${MarkerDatas.photos ? '' : 'hidden'}'>
@@ -270,21 +808,50 @@
                         infoWindow = new AMap.InfoWindow({
                             content: infoStr
                         });
-                        infoWindow.open(map, [data.lnglat.lng, data.lnglat.lat]);
+                        infoWindow.open(map, [MarkerDatas.location.lng, MarkerDatas.location.lat]);
 
                     }
                 });
-            } else if (data.shop && data.shop.poiId === '0') {
-                map.setCenter([data.lnglat.lng, data.lnglat.lat])
-                infoWindow = new AMap.InfoWindow({
-                    content: `<div class='shopDetail'>${data.shop.name}</div >`
-                });
-                infoWindow.open(map, [data.lnglat.lng, data.lnglat.lat]);
             }
-        })
 
+            shopsList.onclick = function () {
+                shopListResult.style.display = 'block'
 
+                // ---------------------------------初始化--------------------------
+                var shopListContainerStr = ''
+                var shopListDetailDatas = []
+                for (let i = 0; i < shopsListData.length; i++) {
+                    placeSearch.searchInBounds(shopsListData[i], polygon, function (status, data) {
+                        if (data.info === 'OK') {
+                            let shopData = data.poiList.pois[data.poiList.pois.length - 1]
+                            if (shopData.indoor_map) {
+                                shopListContainer.innerHTML = shopListContainer.innerHTML + `<div class="listItem" data-id=${shopData.id}>
+                            <img data-id=${shopData.id} src=${shopData.photos ? shopData.photos[0].url : 'data:image/jpeg;base64,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'}
+                                alt="">
+                            <div data-id=${shopData.id} class="shopInfo">
+                                <h3 data-id=${shopData.id} class="shopName">${shopData.name}</h3>
+                                <p data-id=${shopData.id} class="shopAddress"><i class='icon iconfont icon-Marker'></i>${shopData.address}</p>
+                            </div>
+                        </div>`
 
+                            } else {
+                                // console.log(shopData) // 没有室内地图的
+                            }
+                        } else {
+                            // console.log(shopsListData[i], '-----------------')// 找不到信息的
+                        }
+                    })
+                }
+            }
+            // wx.miniProgram.navigateTo({ url: '/path/to/page' })
+            wx.miniProgram.postMessage({ data: 'foo' })
+            wx.miniProgram.postMessage({ data: { foo: 'bar' } })
+            wx.miniProgram.getEnv(function (res) { console.log(res.miniprogram) })
+            let timer = setTimeout(() => {
+                loadingBox.style.display = 'none'
+                clearTimeout(timer)
+            }, 8000)
+        }
     </script>
 
 </body>
